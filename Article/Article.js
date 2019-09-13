@@ -85,7 +85,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Zombies Eat Your Brains',
+    date: 'Tomorrow',
+    firstParagraph: `Zombies reversus ab inferno, nam malum cerebro. De carne animata corpora quaeritis. Summus sit​​, morbo vel maleficia? De Apocalypsi undead dictum mauris. Hi mortuis soulless creaturas, imo monstra adventus vultus comedat cerebella viventium. Qui offenderit rapto, terribilem incessu. The voodoo sacerdos suscitat mortuos comedere carnem. Search for solum oculi eorum defunctis cerebro. Nescio an Undead zombies. Sicut malus movie horror.`,
+
+    secondParagraph: `Cum horribilem resurgere de sepulcris creaturis, sicut de iride et serpens. Pestilentia, ipsa screams. Pestilentia est haec ambulabat mortuos. Sicut malus voodoo. Aenean a dolor vulnerum aperire accedunt, mortui iam vivam. Qui tardius moveri, sed in magna copia sint terribiles legionis. Alii missing oculis aliorum sicut serpere crabs nostram. Putridi odores aere implent.`,
+
+    thirdParagraph: `Tremor est vivos magna. Expansis ulnis video missing carnem armis caeruleum in locis. A morbo amarus in auras. Nihil horum sagittis tincidunt, gelida portenta. The unleashed virus est, et iam mortui ambulabunt super terram. Souless mortuum oculos attonitos back zombies. An hoc incipere Clairvius Narcisse, an ante? Is bello mundi z? `
   }
+  
 ];
 
 function compCreator(object) {
@@ -98,7 +108,7 @@ function compCreator(object) {
   const paraText2 = document.createElement('p');
   const paraText3 = document.createElement('p');
   const spanBtnExpn = document.createElement('span');
-  // const btnOpen = document.createElement('button');
+  const btnOpen = document.createElement('button');
   const btnClose = document.createElement('button');
   
 
@@ -110,7 +120,8 @@ function compCreator(object) {
   paraText.appendChild(paraText2);
   paraText.appendChild(paraText3);
   article.appendChild(spanBtnExpn);
-  article.appendChild(btnClose);
+  spanBtnExpn.appendChild(btnOpen);
+  spanBtnExpn.appendChild(btnClose);
 
 
   h2Article.textContent = object.title;
@@ -118,34 +129,38 @@ function compCreator(object) {
   paraText1.textContent = object.firstParagraph;
   paraText2.textContent = object.secondParagraph;
   paraText3.textContent = object.thirdParagraph;
-  spanBtnExpn.textContent = 'click for more';
+  btnOpen.textContent = 'click for more';
   btnClose.textContent = '\u25b2';
   btnClose.style.display = 'none';
-  paraText.style.overflowY = 'scroll';
+  // paraText.style.overflowY = 'scroll';
 
 
 
   article.classList.add('article');
   pDate.classList.add('date');
   paraText.classList.add('pText');
-  spanBtnExpn.classList.add('expandButton');
+  btnOpen.classList.add('expandButton');
   // btnOpen.classList.add('article-open');
   btnClose.classList.add('close');
   
 
   
 
-  article.addEventListener('click', (event) => {
-    // article.style.padding = '0 20px 100px';
+  btnOpen.addEventListener('click', (event) => {
+    article.style.padding = '0 20px 100px';
     
-    spanBtnExpn.style.display = 'none';
+    btnOpen.style.display = 'none';
     article.classList.add('article-open');
-    
     btnClose.style.display = 'inline-block';
+    
   });
-  // article.addEventListener('mouseup', (event)=>{
-  //   article.style.paddingBottom = '25px';
-  // });
+
+  btnClose.addEventListener('click', (event)=>{
+    article.style.padding = '0 20px 25px';
+    article.classList.remove('article-open');
+    event.target.style.display = 'none';
+    btnOpen.style.display = 'flex';
+  });
 
   return article;
 }
