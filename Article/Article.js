@@ -88,6 +88,74 @@ const data = [
   }
 ];
 
+function compCreator(object) {
+  
+  let article = document.createElement('div');
+  const h2Article = document.createElement('h2');
+  const pDate = document.createElement('p'); 
+  const paraText = document.createElement('div');
+  const paraText1 = document.createElement('p');
+  const paraText2 = document.createElement('p');
+  const paraText3 = document.createElement('p');
+  const spanBtnExpn = document.createElement('span');
+  // const btnOpen = document.createElement('button');
+  const btnClose = document.createElement('button');
+  
+
+
+  article.appendChild(h2Article);
+  article.appendChild(pDate);
+  article.appendChild(paraText);
+  paraText.appendChild(paraText1);
+  paraText.appendChild(paraText2);
+  paraText.appendChild(paraText3);
+  article.appendChild(spanBtnExpn);
+  article.appendChild(btnClose);
+
+
+  h2Article.textContent = object.title;
+  pDate.textContent = object.date;
+  paraText1.textContent = object.firstParagraph;
+  paraText2.textContent = object.secondParagraph;
+  paraText3.textContent = object.thirdParagraph;
+  spanBtnExpn.textContent = 'click for more';
+  btnClose.textContent = '\u25b2';
+  btnClose.style.display = 'none';
+  paraText.style.overflowY = 'scroll';
+
+
+
+  article.classList.add('article');
+  pDate.classList.add('date');
+  paraText.classList.add('pText');
+  spanBtnExpn.classList.add('expandButton');
+  // btnOpen.classList.add('article-open');
+  btnClose.classList.add('close');
+  
+
+  
+
+  article.addEventListener('click', (event) => {
+    // article.style.padding = '0 20px 100px';
+    
+    spanBtnExpn.style.display = 'none';
+    article.classList.add('article-open');
+    
+    btnClose.style.display = 'inline-block';
+  });
+  // article.addEventListener('mouseup', (event)=>{
+  //   article.style.paddingBottom = '25px';
+  // });
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(info => {
+articles.appendChild(compCreator(info));
+});
+
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
